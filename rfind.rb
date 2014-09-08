@@ -6,28 +6,31 @@ file_w_content = IO.popen('find . -type f | grep -l ' +cmd_argument)
 found_word = IO.popen("grep " + cmd_argument + " * | cut -f2 -d:")
 found_file = IO.popen("find . -name " +cmd_argument+"*")
 
-workinprog = IO.popen("grep -ni " +cmd_argument)
+workinprog = IO.popen("grep -n -i " +cmd_argument+ " *")
+this = IO.popen("grep " + cmd_argument + " * | cut -f1 -d:")
+
 
 word = found_word.to_enum
 num = line_number.to_enum
 
-#filelist = `find . -iname "*.rb" -o -iname "*.erb" -o -iname "*.js" -o -iname "*.css" -o -iname "*.yml" -o -iname "*.html" -o -iname "*.txt"`.split("\n").sort! 
+filelist = `find . -iname "*.rb" -o -iname "*.erb" -o -iname "*.js" -o -iname "*.css" -o -iname "*.yml" -o -iname "*.html" -o -iname "*.txt"`.split("\n").sort! 
+
 #--------------------------------------------------------------------
 puts "Files with names that matches <" + cmd_argument + ">"
-found_file.each {|file|
-    puts "  " + file
+filelist.each {|file|
+	if(file.include? cmd_argument)
+    	puts "  " + file
+    end
 }
 #--------------------------------------------------------------------
 
 puts "**************************************************"
 puts "Files with content that matches <" + cmd_argument + ">"
-	this = IO.popen("grep " + cmd_argument + " * | cut -f1 -d:")
-	this.each{ |contaning_file|
-		if(this)
-	    puts contaning_file
-
-	    puts "  " + "hello"  #grep -ni word_to_look_for file_to_look_in
-
+	
+	filelist.each{ |contaning_file|
+		if(contaning_file.include? file_w_content.next)
+			puts "hi"
+		end
 	}
 puts "ended"
 
