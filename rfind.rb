@@ -2,7 +2,7 @@ cmd_argument = ARGV[0]
 found_file = IO.popen("find . -name " +cmd_argument+"*") # the dot means the current directroy
 #--------------------the above is currently working-----------------------
 line_number = IO.popen("grep -n " +cmd_argument + " * | cut -f2 -d:")
-file_w_content = IO.popen('find . -type f -exec grep -l ' +cmd_argument+' {} \;')
+file_w_content = IO.popen('find . -type f | grep -l ' +cmd_argument)
 found_word = IO.popen("grep " + cmd_argument + " * | cut -f2 -d:")
 found_file = IO.popen("find . -name " +cmd_argument+"*")
 
@@ -21,12 +21,15 @@ found_file.each {|file|
 
 puts "**************************************************"
 puts "Files with content that matches <" + cmd_argument + ">"
+	this = IO.popen("grep " + cmd_argument + " * | cut -f1 -d:")
+	this.each{ |contaning_file|
+		if(this)
+	    puts contaning_file
 
-found_file.each{ |contaning_file|
-    puts contaning_file
-    puts "  " +  #grep -ni word_to_look_for file_to_look_in
+	    puts "  " + "hello"  #grep -ni word_to_look_for file_to_look_in
 
-}
+	}
+puts "ended"
 
 
 # file_w_content.each{ |files|
