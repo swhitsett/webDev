@@ -7,7 +7,8 @@ found_word = IO.popen("grep " + cmd_argument + " * | cut -f2 -d:")
 found_file = IO.popen("find . -name " +cmd_argument+"*")
 
 workinprog = IO.popen("grep -n -i " +cmd_argument+ " *")
-this = IO.popen("grep " + cmd_argument + " * | cut -f1 -d:")
+#this = IO.popen("grep " + cmd_argument + " * | cut -f1 -d:")
+horse = `grep #{cmd_argument} *`
 
 
 word = found_word.to_enum
@@ -28,9 +29,13 @@ puts "**************************************************"
 puts "Files with content that matches <" + cmd_argument + ">"
 	
 	filelist.each{ |contaning_file|
-		if(contaning_file.include? file_w_content.next)
-			puts "hi"
-		end
+		puts contaning_file
+		words = `grep -ni #{cmd_argument} #{contaning_file}`
+		words = words.split("\n")
+		words.each{ |word|
+			puts "  " + word
+		}
+		puts "--------------------------------------------------"
 	}
 puts "ended"
 
