@@ -1,12 +1,7 @@
 cmd_argument = ARGV[0] 
+mr_correct_files = Array.new
 file_w_content = `grep -r #{cmd_argument} * | cut -f1 -d:`.split("\n").uniq! #file name contaning the word
 filelist = `find . -iname "*.rb" -o -iname "*.erb" -o -iname "*.js" -o -iname "*.css" -o -iname "*.yml" -o -iname "*.html" -o -iname "*.txt"`.split("\n").sort! 
-#--------------------the above is currently working-----------------------
-# line_number = IO.popen("grep -n " +cmd_argument + " * | cut -f2 -d:")
-# file_w_content = IO.popen('find . -type f | grep -l ' +cmd_argument)
-# found_word = IO.popen("grep " + cmd_argument + " * | cut -f2 -d:")
-# found_file = IO.popen("find . -name " +cmd_argument+"*")
-
 #--------------------------------------------------------------------
 puts "Files with names that matches <" + cmd_argument + ">"
 filelist.each {|file|
@@ -14,21 +9,25 @@ filelist.each {|file|
     	puts "  " + file
     end
 }
-# rfind rfind
 #--------------------------------------------------------------------
-
+filelist.each do |mr_extensions|
+	file_w_content.each do |mr_found_words|
+		if(mr_extensions.include? mr_found_words)
+			mr_correct_files.push(mr_extensions)
+		end
+	end
+end
+#-------------------------------------------------------------------
 puts "**************************************************"
 puts "Files with content that matches <" + cmd_argument + ">"
-if(file_w_content != nil)
-	file_w_content.each do |word|
-		if(File.readlines(word).grep(/#{cmd_argument}/)) 
-			puts "./" + word
-			words = `grep -ni #{cmd_argument} #{word}`
-			words = words.split("\n")
-			words.each{ |word|
-				puts "  " + word #.split(':').join(':  ') #split will cut the string at the ":" and join will rejoin it using ":  "
-			}
-			puts "--------------------------------------------------"
-		end
+mr_correct_files.each do |mr_word| 
+	if(File.readlines(mr_word).grep(/#{cmd_argument}/)) 
+		puts mr_word
+		words = `grep -ni #{cmd_argument} #{mr_word}`
+		words = words.split("\n")
+		words.each{ |final|
+			puts "  " + final #.split(':').join(':  ') #split will cut the string at the ":" and join will rejoin it using ":  "
+		}
+		puts "--------------------------------------------------"
 	end
 end
