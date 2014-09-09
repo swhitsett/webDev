@@ -1,5 +1,5 @@
 cmd_argument = ARGV[0] 
-file_w_content = `grep #{cmd_argument} * | cut -f1 -d:`.split("\n").uniq! #file name contaning the word
+file_w_content = `grep -r #{cmd_argument} * | cut -f1 -d:`.split("\n").uniq! #file name contaning the word
 filelist = `find . -iname "*.rb" -o -iname "*.erb" -o -iname "*.js" -o -iname "*.css" -o -iname "*.yml" -o -iname "*.html" -o -iname "*.txt"`.split("\n").sort! 
 #--------------------the above is currently working-----------------------
 # line_number = IO.popen("grep -n " +cmd_argument + " * | cut -f2 -d:")
@@ -22,11 +22,11 @@ puts "Files with content that matches <" + cmd_argument + ">"
 if(file_w_content != nil)
 	file_w_content.each do |word|
 		if(File.readlines(word).grep(/#{cmd_argument}/)) 
-			puts word
+			puts "./" + word
 			words = `grep -ni #{cmd_argument} #{word}`
 			words = words.split("\n")
 			words.each{ |word|
-				puts "  " + word
+				puts "  " + word #.split(':').join(':  ') #split will cut the string at the ":" and join will rejoin it using ":  "
 			}
 			puts "--------------------------------------------------"
 		end
