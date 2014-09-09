@@ -26,8 +26,10 @@ mr_correct_files.each do |mr_word|
 		words = `grep -ni #{cmd_argument} #{mr_word}`
 		words = words.split("\n")
 		words.each{ |final|
-			puts "  " + final #.split(':').join(':  ') #split will cut the string at the ":" and join will rejoin it using ":  "
+			puts "  " + final 
 		}
-		puts "--------------------------------------------------"
+		if( mr_word != mr_correct_files.last)
+			puts "--------------------------------------------------"
+		end
 	end
 end
