@@ -10,10 +10,13 @@ filelist.each {|file|
     end
 }
 #--------------------------------------------------------------------
+
 filelist.each do |mr_extensions|
-	file_w_content.each do |mr_found_words|
-		if(mr_extensions.include? mr_found_words)
-			mr_correct_files.push(mr_extensions)
+	if(file_w_content != nil)
+		file_w_content.each do |mr_found_words|
+			if(mr_extensions.include? mr_found_words)
+				mr_correct_files.push(mr_extensions)
+			end
 		end
 	end
 end
