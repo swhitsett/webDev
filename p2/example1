@@ -1,0 +1,54 @@
+$ hangman.rb 
+Enter word length between 5-20: 5
+enter your guess: a
+
+a  (9 chances left)
+_ _ _ _ _ 
+
+enter your guess: e
+
+a e  (8 chances left)
+_ _ _ _ _ 
+
+enter your guess: i
+
+a e i  (7 chances left)
+_ _ _ _ _ 
+
+enter your guess: o
+
+a e i o  (6 chances left)
+_ _ _ _ _ 
+
+enter your guess: u
+
+a e i o u  (5 chances left)
+_ _ _ _ _ 
+
+enter your guess: y
+
+a e i o u  (5 chances left)
+_ _ y _ _ 
+
+enter your guess: c
+
+a e i o u  (5 chances left)
+c _ y _ _ 
+
+enter your guess: r
+
+a e i o u  (5 chances left)
+c r y _ _ 
+
+enter your guess: p
+
+a e i o u  (5 chances left)
+c r y p _ 
+
+enter your guess: t
+
+a e i o u  (5 chances left)
+c r y p t 
+
+YOU WIN!
+$

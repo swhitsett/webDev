@@ -1,0 +1,109 @@
+$ hangman.rb 
+Enter word length between 5-20: 20
+enter your guess: a
+
+a  (9 chances left)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+enter your guess: b
+
+a b  (8 chances left)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+enter your guess: c
+
+a b c  (7 chances left)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+enter your guess: d
+
+a b c d  (6 chances left)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+enter your guess: e
+
+a b c d  (6 chances left)
+_ _ _ _ _ _ _ _ _ e _ _ _ _ _ e _ e _ _ 
+
+enter your guess: f
+
+a b c d f  (5 chances left)
+_ _ _ _ _ _ _ _ _ e _ _ _ _ _ e _ e _ _ 
+
+enter your guess: g
+
+a b c d f  (5 chances left)
+_ _ _ _ _ _ _ _ g e _ _ _ _ _ e _ e _ _ 
+
+enter your guess: h
+
+a b c d f  (5 chances left)
+_ h _ _ _ _ _ _ g e _ _ _ _ _ e _ e _ _ 
+
+enter your guess: i
+
+a b c d f  (5 chances left)
+_ h i _ _ _ _ _ g e _ i _ i _ e _ e _ _ 
+
+enter your guess: j
+
+a b c d f j  (4 chances left)
+_ h i _ _ _ _ _ g e _ i _ i _ e _ e _ _ 
+
+enter your guess: k
+
+a b c d f j k  (3 chances left)
+_ h i _ _ _ _ _ g e _ i _ i _ e _ e _ _ 
+
+enter your guess: l
+
+a b c d f j k  (3 chances left)
+_ h i l _ _ _ _ g e _ i _ i _ e _ e _ _ 
+
+enter your guess: m
+
+a b c d f j k m  (2 chances left)
+_ h i l _ _ _ _ g e _ i _ i _ e _ e _ _ 
+
+enter your guess: n
+
+a b c d f j k m  (2 chances left)
+_ h i l _ _ _ _ g e n i _ i _ e n e _ _ 
+
+enter your guess: o
+
+a b c d f j k m  (2 chances left)
+_ h i l o _ _ o g e n i _ i _ e n e _ _ 
+
+enter your guess: p
+
+a b c d f j k m  (2 chances left)
+p h i l o p _ o g e n i _ i _ e n e _ _ 
+
+enter your guess: q
+
+a b c d f j k m q  (1 chances left)
+p h i l o p _ o g e n i _ i _ e n e _ _ 
+
+enter your guess: r
+
+a b c d f j k m q  (1 chances left)
+p h i l o p r o g e n i _ i _ e n e _ _ 
+
+enter your guess: s
+
+a b c d f j k m q  (1 chances left)
+p h i l o p r o g e n i _ i _ e n e s s 
+
+enter your guess: t
+
+a b c d f j k m q  (1 chances left)
+p h i l o p r o g e n i t i _ e n e s s 
+
+enter your guess: u
+
+a b c d f j k m q u  (0 chances left)
+p h i l o p r o g e n i t i _ e n e s s 
+
+YOU LOSE! The word was: philoprogenitiveness
+$

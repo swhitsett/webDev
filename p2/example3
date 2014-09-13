@@ -1,0 +1,33 @@
+NOTE: this is not a complete example, it demonstrates error messages
+$ hangman.rb 
+Enter word length between 5-20: 5
+enter your guess: a
+
+a  (9 chances left)
+_ _ _ _ _ 
+
+enter your guess: e
+
+a e  (8 chances left)
+_ _ _ _ _ 
+
+enter your guess: e
+you already guessed e
+
+a e  (8 chances left)
+_ _ _ _ _ 
+
+enter your guess: 33
+only lowercase letters a-z are allowed
+
+a e  (8 chances left)
+_ _ _ _ _ 
+
+enter your guess: ! 
+only lowercase letters a-z are allowed
+
+a e  (8 chances left)
+_ _ _ _ _ 
+
+enter your guess: 
+

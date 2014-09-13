@@ -23,7 +23,7 @@ puts "Files with content that matches <" + cmd_argument + ">"
 mr_correct_files.each do |mr_word| 
 	if(File.readlines(mr_word).grep(/#{cmd_argument}/)) 
 		puts mr_word
-		words = `grep -ni #{cmd_argument} #{mr_word}`
+		words = `grep -nir #{cmd_argument} #{mr_word}`
 		words = words.split("\n")
 		words.each{ |final|
 			puts "  " + final 
