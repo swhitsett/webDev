@@ -25,18 +25,29 @@ while(is_int == false)
 		is_int = true
 	end
 end
+# this seems more pratical but slower.
+# dictionary.delete_if{|i|
+# 	i.length != w_length.to_i
+# }
+# dictionary.compact
+newArray = Array.new
 dictionary.each{|i|
-	if(i.length == w_length)
-		puts " wordL "+i.length + "enterdL "+w_length
-		dictionary.delete(i) #use.compact! to remove nills
+	if(i.length == w_length.to_i)
+		newArray.push(i)
 	end
 }
 
+desired_word_length = Array.new(w_length.to_i,'_'.chomp) # WHY IS THERE ALWAYS NEWLINES IN AN ARRAY???
 while(num_of_attempts != 0)		
-	print "enter your guess:"
+
+	print "enter your guess: "
 	cur_guess = gets
+	print "\n"
+	guess_array.push(cur_guess.chomp) #
 
-	guess_array.push(cur_guess)
-
-
+	guess_array.each{|index| print index + " "}
+	puts " (" + num_of_attempts.to_s + " chances left)"
+	desired_word_length.each{|index| print index +" "}
+	print "\n" + "\n"
+	num_of_attempts = num_of_attempts - 1
 end
