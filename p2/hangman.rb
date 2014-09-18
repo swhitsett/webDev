@@ -1,18 +1,12 @@
 #!/usr/local/bin/ruby
 
+# im sorry this code is so horrible.
+
 num_of_attempts = 9
 guess_array = Array.new
-tmp_array = []
 before_deletion = Array.new
-
-# def cheat_function (swap_array, cur_guess)
-# 	tmp_array = swap_array.clone
-	
-# 	swap_array.delete_if{ |i|
-# 		i.include?(cur_guess)
-# 	}
-# 	#return tmp_array
-# end
+honest_game_yet = false
+mr_word = ""
 
 dictionary =File.open("wordlist.txt").read.split("\n")
 is_int = false
@@ -40,7 +34,6 @@ dictionary.each{|i|
 		swap_array.push(i)
 	end
 }
-dictionary = swap_array
 #-------------------------------------------------------------------------
 desired_word_length = Array.new(w_length.to_i,'_'.chomp) # WHY IS THERE ALWAYS NEWLINES IN AN ARRAY???
 while(num_of_attempts != 0)		
@@ -51,26 +44,53 @@ while(num_of_attempts != 0)
 
 	if (guess_array.include? cur_guess)
 		puts "you already guessed " + cur_guess
+		num_of_attempts = num_of_attempts + 1
 	elsif (!(/[[:lower:]]/.match(cur_guess)))
 		puts "only lowercase letters a-z are allowed"
-	elsif((/[[:alpha:]]/.match(cur_guess)))
-		tmp_array = swap_array.clone
+		num_of_attempts = num_of_attempts + 1
+	elsif ((/[[:alpha:]]/.match(cur_guess)) || honest_game_yet == false)
+		if(swap_array.length != 0)
+			tmp_array = swap_array.clone
+		end
 	
 		swap_array.delete_if{ |i|
 			i.include?(cur_guess)
 		}
 		guess_array.push(cur_guess)
-		num_of_attempts = num_of_attempts - 1
-	end
-	
-	if (swap_array.length == 0)
-		mr_word = tmp_array[rand(tmp_array.length)]
-		desired_word_length[mr_word.index(cur_guess)] = cur_guess
 	end
 
-	guess_array.each{|index| print index + " "}
-	puts " (" + num_of_attempts.to_s + " chances left)"
-	desired_word_length.each{|index| print index +" "}
-	print "\n" + "\n"
+	if (swap_array.length == 0 || honest_game_yet == true)
+		if(honest_game_yet == false)
+			mr_word = tmp_array[rand(tmp_array.length)]
+			puts mr_word
+		end
+
+		honest_game_yet = true   #location location location
+		
+		if(mr_word.include? cur_guess)
+			desired_word_length[mr_word.index(cur_guess)] = cur_guess
+			num_of_attempts = num_of_attempts + 1
+		end
+	end
+
+	num_of_attempts = num_of_attempts - 1
+
+	if (num_of_attempts <= 0)
+		if(mr_word == "")
+			mr_word = tmp_array[rand(tmp_array.length)]
+		end
+		puts "YOU LOOSE! The word was: "+mr_word
+	elsif (!(desired_word_length.include? "_"))
+		puts "YOU WIN!"
+		num_of_attempts = 0
+	elsif(num_of_attempts != 0)
+	
+		guess_array.each{|index| print index + " "}
+		puts " (" + num_of_attempts.to_s + " chances left)"
+		desired_word_length.each{|index| print index +" "}
+		print "\n" + "\n"
+	end
 end
+
+
 #---------------------------------------------------------------------------
