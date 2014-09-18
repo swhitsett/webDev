@@ -1,19 +1,18 @@
 #!/usr/local/bin/ruby
 
-num_of_attempts = 10
+num_of_attempts = 9
 guess_array = Array.new
-# def start_fair_game(tmp_array)
-# 	word = tmp_array[rand(tmp_array.length)]
-# end
+tmp_array = []
+before_deletion = Array.new
 
-def cheat_function (swap_array, cur_guess)
-	tmp_array = swap_array
+# def cheat_function (swap_array, cur_guess)
+# 	tmp_array = swap_array.clone
 	
-	swap_array.delete_if{ |i|
-		i.include?(cur_guess)
-	}
-	return tmp_array
-end
+# 	swap_array.delete_if{ |i|
+# 		i.include?(cur_guess)
+# 	}
+# 	#return tmp_array
+# end
 
 dictionary =File.open("wordlist.txt").read.split("\n")
 is_int = false
@@ -34,11 +33,7 @@ while(is_int == false)
 end
 
 #---------------------------------------------------------------------------
-# this seems more pratical but wayyyy slower.
-# dictionary.delete_if{|i|
-# 	i.length != w_length.to_i
-# }
-# dictionary.compact
+# delete_if seems more pratical but is slower
 swap_array = Array.new
 dictionary.each{|i|
 	if(i.length == w_length.to_i)
@@ -54,19 +49,28 @@ while(num_of_attempts != 0)
 	cur_guess = gets.chomp
 	print "\n"
 
-	if((/[[:alpha:]]/.match(cur_guess)))
-		mr_temp = cheat_function(swap_array, cur_guess)
+	if (guess_array.include? cur_guess)
+		puts "you already guessed " + cur_guess
+	elsif (!(/[[:lower:]]/.match(cur_guess)))
+		puts "only lowercase letters a-z are allowed"
+	elsif((/[[:alpha:]]/.match(cur_guess)))
+		tmp_array = swap_array.clone
+	
+		swap_array.delete_if{ |i|
+			i.include?(cur_guess)
+		}
 		guess_array.push(cur_guess)
+		num_of_attempts = num_of_attempts - 1
 	end
+	
 	if (swap_array.length == 0)
-		mr_word = mr_temp[rand(mr_temp.length)]
-		desired_word_length[mr_word.index('y')] = cur_guess
+		mr_word = tmp_array[rand(tmp_array.length)]
+		desired_word_length[mr_word.index(cur_guess)] = cur_guess
 	end
 
 	guess_array.each{|index| print index + " "}
 	puts " (" + num_of_attempts.to_s + " chances left)"
 	desired_word_length.each{|index| print index +" "}
 	print "\n" + "\n"
-	num_of_attempts = num_of_attempts - 1
 end
 #---------------------------------------------------------------------------
